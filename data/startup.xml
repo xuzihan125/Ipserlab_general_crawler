@@ -1,0 +1,332 @@
+<root>
+    <startup>
+        <sdescription>Pharmaceutical company developing inhibitors for safer and more effective anti-inflammatories for
+            treatment of sinusitis, pain, cardiovascular, respiratory indications and cancer.
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>http://www.accengen.com/</slink>
+        <sname>AccenGen Therapeutics</sname>
+    </startup>
+    <startup>
+        <sdescription>Digital high resolution and high throughput PCR system</sdescription>
+        <sindustry>/</sindustry>
+        <slink>https://acenxionbiosystems.com/</slink>
+        <sname>AcenXion Biosystems</sname>
+    </startup>
+    <startup>
+        <sdescription>Novel technology for high-yield production of biologic RNA agents for improved RNA therapeutics
+        </sdescription>
+        <sindustry>Technology,Healthcare</sindustry>
+        <slink/>
+        <sname>AimRNA</sname>
+    </startup>
+    <startup>
+        <sdescription>Cellular therapeutic using engineered cells to specifically attack metastatic cancer cells and
+            halt malignant metastasis.
+        </sdescription>
+        <sindustry>Healthcare,Biotechnology</sindustry>
+        <slink/>
+        <sname>AlloOnc</sname>
+    </startup>
+    <startup>
+        <sdescription>Enabling more efficient RNA-seq library synthesis for diagnostics, pharmaceutical development and
+            food security.
+        </sdescription>
+        <sindustry>Healthcare,Food and Beverage</sindustry>
+        <slink>https://amaryllisnucleics.com/</slink>
+        <sname>Amaryllis Nucleics</sname>
+    </startup>
+    <startup>
+        <sdescription>Develops genetically modified food crops for increased efficiency and reduced environmental
+            impact.
+        </sdescription>
+        <sindustry>Agriculture,Food and Beverage</sindustry>
+        <slink>https://arcadiabio.com/</slink>
+        <sname>Arcadia Biosciences</sname>
+    </startup>
+    <startup>
+        <sdescription>RNA-based molecular biology and nano-technology to identify pathogens</sdescription>
+        <sindustry>Technology,Biotechnology</sindustry>
+        <slink>https://astrona.blogspot.com/</slink>
+        <sname>AstRoNA</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing a textile that stays dry by attaching a network of water-attracting threads to
+            water-repellent fabric.
+        </sdescription>
+        <sindustry>Fashion</sindustry>
+        <slink/>
+        <sname>Atacama</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing ceramic and semiconductor blades only a few atoms thick, with integrated
+            micro-capillaries to allow for lubricating fluid flow.
+        </sdescription>
+        <sindustry>Material</sindustry>
+        <slink>https://batocera.org/</slink>
+        <sname>Atocera</sname>
+    </startup>
+    <startup>
+        <sdescription>Mitochondrial targeted therapeutics for orphan disease indications</sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink/>
+        <sname>Beiwe Pharma
+            Mitochondrial targeted therapeutics for orphan disease indications
+        </sname>
+    </startup>
+    <startup>
+        <sdescription>Direct production of sugar acids and oligomers from cellulosic biomass</sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink/>
+        <sname>Bionate</sname>
+    </startup>
+    <startup>
+        <sdescription>High throughput cardiotoxicity screening and high content cardiac function assays</sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink/>
+        <sname>CardioProbe</sname>
+    </startup>
+    <startup>
+        <sdescription>Novel medical devices to optimize the care of the critically ill and wounded, improving
+            ventilation, fluid administration and hemorrhage control
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://www.certuscriticalcare.com/</slink>
+        <sname>Certus Critical Care</sname>
+    </startup>
+    <startup>
+        <sdescription>Designing, developing and manufacturing a line of extremely low-power, ultrasonic 3D-sensing
+            solutions for gesture recognition in consumer electronics, smart homes and industrial automation.
+        </sdescription>
+        <sindustry>Technology,Manufacturing,Energy</sindustry>
+        <slink/>
+        <sname>Chirp Microsystems</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing a platform technology to optimize gene expression for agriculturally significant traits
+            in crop plants &amp; livestock.
+        </sdescription>
+        <sindustry>Technology,Biotechnology,Agriculture</sindustry>
+        <slink>https://circularis.com/site/</slink>
+        <sname>Circularis</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing evidence-based digital therapies in mixed reality video game form to reduce cognitive
+            impairments
+        </sdescription>
+        <sindustry>Technology,Healthcare,Entertainment</sindustry>
+        <slink>https://creativedestructionlab.com/companies/cognivive/</slink>
+        <sname>Cognivive</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing and marketing advanced plug-in hybrid electric vehicle and battery electric vehicle
+            drivetrain solutions for the global automotive industry.
+        </sdescription>
+        <sindustry>Transportation,Energy</sindustry>
+        <slink>http://efficientdrivetrains.contentx.com/</slink>
+        <sname>Efficient Drivetrains</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing the next generation of microbiome-based solutions to establish, restore, and maintain a
+            healthy human gut microbiome.
+        </sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink/>
+        <sname>Evolve Biosystems</sname>
+    </startup>
+    <startup>
+        <sdescription>Development of Furan Fatty Acids (FuFAs), naturally occurring lipids in fish oils, as
+            nutraceuticals and pharmaceuticals that could protect cardiovascular health
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink/>
+        <sname>Furanica</sname>
+    </startup>
+    <startup>
+        <sdescription>Biotech company with highly effective enzymatic approaches for high yield and cost-effective
+            production of complex glycans.
+        </sdescription>
+        <sindustry>/</sindustry>
+        <slink/>
+        <sname>Glycohub</sname>
+    </startup>
+    <startup>
+        <sdescription>Vitamin, antioxidant and bioactive compound stabilizer and delivery system for food, nutraceutical
+            and cosmetic products.
+        </sdescription>
+        <sindustry>Cosmetic,Food and Beverage</sindustry>
+        <slink/>
+        <sname>InnovaNutra</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing novel stem cell delivery platforms for regeneration of brain tissue in patients
+            suffering from traumatic brain injury, stroke, dementia and neurodegenerative disorders.
+        </sdescription>
+        <sindustry>Healthcare,Biotechnology</sindustry>
+        <slink>https://junobiomedical.com/</slink>
+        <sname>Juno BioMedical</sname>
+    </startup>
+    <startup>
+        <sdescription>New CT scanner and imaging algorithms for imaging breast tissue.</sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink/>
+        <sname>Isotropic Imaging Corporation</sname>
+    </startup>
+    <startup>
+        <sdescription>Repurposing the tobacco plant to manufacture vaccines and therapeutics to improve quality of
+            life.
+        </sdescription>
+        <sindustry>Healthcare,Biotechnology</sindustry>
+        <slink/>
+        <sname>Inserogen</sname>
+    </startup>
+    <startup>
+        <sdescription>Provides storage and analysis solutions for management of large data systems, including unbiased
+            high-resolution identification and surveillance of human and other species genome/DNA.
+        </sdescription>
+        <sindustry>Technology</sindustry>
+        <slink/>
+        <sname>LOGOS 4N</sname>
+    </startup>
+    <startup>
+        <sdescription>Development and rapid translation of companion diagnostics and therapeutics</sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://www.luminancebio.com/</slink>
+        <sname>Luminance Biosciences</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing advanced research tools for cultivating and growing cells in three dimensions.
+        </sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink>https://www.molecularmatrix.com/</slink>
+        <sname>Molecular Matrix</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing a resorbable and injectable delivery vehicle that localizes cells at the defect site
+            and promotes tissue repair.
+        </sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink>https://www.mcw.com/</slink>
+        <sname>MCW Engineering</sname>
+    </startup>
+    <startup>
+        <sdescription>A novel slide-free microscope technology for research and diagnostic applications.</sdescription>
+        <sindustry>Technology</sindustry>
+        <slink/>
+        <sname>MUSE Microscopy</sname>
+    </startup>
+    <startup>
+        <sdescription>Development of engineered enzymes to treat Celiac disease</sdescription>
+        <sindustry>Healthcare,Biotechnology</sindustry>
+        <slink>
+            https://www.takeda.com/newsroom/newsreleases/2020/takeda-acquires-pvp-biologics-following-results-of-a--phase-1-study-of-tak-062-kuma062-for-the-treatment-of-celiac-disease/
+        </slink>
+        <sname>PvP Biologics</sname>
+    </startup>
+    <startup>
+        <sdescription>Develops beta-solenoid proteins as &#8220;molecular legos&#8221; for applications in self-assembly
+            of nanoparticle based devices and materials, environmental remediation and passive mining, structured
+            catalysis and potential tissue engineering.
+        </sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink/>
+        <sname>Protein Architects</sname>
+    </startup>
+    <startup>
+        <sdescription>Industrial mass production of inexpensive photosensors, photosensor arrays, and radiation
+            detectors
+        </sdescription>
+        <sindustry>Technology,Manufacturing</sindustry>
+        <slink>https://photonlab-abalone.com/</slink>
+        <sname>PhotonLab</sname>
+    </startup>
+    <startup>
+        <sdescription>Develops life-changing therapies to treat rare central nervous system (CNS) disorders.
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://www.sagerx.com/</slink>
+        <sname>Sage Therapeutics</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing chemical sensors and information systems designed to identify specific chemicals in
+            volatile, aerosol or liquid form.
+        </sdescription>
+        <sindustry>Technology,Chemical</sindustry>
+        <slink/>
+        <sname>SensIT</sname>
+    </startup>
+    <startup>
+        <sdescription>Treatments for osteoporosis and inflammatory arthritis, particularly rheumatoid arthritis.
+        </sdescription>
+        <sindustry>/</sindustry>
+        <slink/>
+        <sname>Regenerative Arthritis &amp; Bone Medicine (RABOME)</sname>
+    </startup>
+    <startup>
+        <sdescription>Creating advanced platform for local drug activation.</sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://www.shasqi.com/</slink>
+        <sname>Shasqi</sname>
+    </startup>
+    <startup>
+        <sdescription>Preventing arthritis after injury</sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://www.tesiopharm.com/</slink>
+        <sname>Tesio Pharmaceuticals</sname>
+    </startup>
+    <startup>
+        <sdescription>Focused on advancing novel therapeutics for high-mortality cancers; initial goal is to develop a
+            first-in-class treatment for glioblastoma multiforme (GBM).
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink>https://sapiencetherapeutics.com/</slink>
+        <sname>Sapience Therapeutics</sname>
+    </startup>
+    <startup>
+        <sdescription>Wireless sensor network architecture to improve energy efficiency and reduce power and cooling
+            costs in data centers. Company was acquired by Panduit in 2014.
+        </sdescription>
+        <sindustry>Technology,Energy</sindustry>
+        <slink>https://www.vigilent.com/synapsense/</slink>
+        <sname>SynapSense</sname>
+    </startup>
+    <startup>
+        <sdescription>Technology that removes the immunological barriers in animal-derived tissues, rendering them
+            immune-compatible with human patients.
+        </sdescription>
+        <sindustry>Biotechnology</sindustry>
+        <slink>http://www.vivitatechnologies.com/</slink>
+        <sname>ViVita Technologies</sname>
+    </startup>
+    <startup>
+        <sdescription>Provides site-specific irrigation monitoring and recommendations to efficiently meet agricultural
+            production goals.
+        </sdescription>
+        <sindustry>Agriculture</sindustry>
+        <slink>https://tule.ag/</slink>
+        <sname>Tule Technologies</sname>
+    </startup>
+    <startup>
+        <sdescription>Developing a telemedicine-sensing device that provides feedback to patients and physicians in the
+            diagnosis and treatment of chronic venous insufficiencies.
+        </sdescription>
+        <sindustry>Technology,Healthcare</sindustry>
+        <slink>
+            https://www.dnb.com/business-directory/company-profiles.venosense_inc.999467bb6e7fdebf87f78703a37cb813.html
+        </slink>
+        <sname>VenoSense</sname>
+    </startup>
+    <startup>
+        <sdescription>Early detection and rapid response to critical agricultural disease infestations</sdescription>
+        <sindustry>Healthcare,Agriculture</sindustry>
+        <slink/>
+        <sname>XTB Laboratories</sname>
+    </startup>
+    <startup>
+        <sdescription>A non-invasive portable screening methodology and device for detecting traumatic brain injury.
+        </sdescription>
+        <sindustry>Healthcare</sindustry>
+        <slink/>
+        <sname>Vizzario</sname>
+    </startup>
+</root>

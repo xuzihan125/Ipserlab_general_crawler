@@ -1,0 +1,294 @@
+from bs4 import BeautifulSoup, NavigableString, Comment
+
+
+remainer = ["href"]
+del_type = ["style", "script"]
+
+# used for reduce the size of the element tree, reduce the unnecessary attributes and depth od divs, and also reduce the duplicate header and footer
+class HTML_Refiner:
+    def __init__(self):
+        self.header = set()
+        self.footer = set()
+
+    # reset the cleaner
+    def clear(self):
+        self.header = set()
+        self.footer = set()
+
+    # the main process of reducing a page tree
+    def process(self, root):
+        parsed = self.check(root.body)
+        refined = self.refine(parsed)
+        reduced = self.reducer(refined)
+        return reduced
+
+    # check for the unnecessary attributes
+    def check(self, node):
+        # try:
+        # if isinstance(node, str):
+        #     if not node.strip():
+        #         return None
+        #     else:
+        #         return node
+        # return node if node.strip() else None
+        if node is None or node.name in del_type:
+            return None
+
+        # delete unnecessary attribute
+        del_list = []
+        for attr_name in node.attrs.keys():
+            if attr_name not in remainer:
+                del_list.append(attr_name)
+
+        for attr_name in del_list:
+            del node[attr_name]
+
+        # remove irrelevant information
+        if len(node.contents) != 0:
+            to_be_delete = []
+            for child in node.contents:
+                if isinstance(child, NavigableString):
+                    if isinstance(child, Comment):
+                        to_be_delete.append(child)
+                        continue
+                    value = child.strip()
+                    if not value:
+                        to_be_delete.append(child)
+                    else:
+                        child.replace_with(child.strip())
+                    continue
+                result = self.check(child)
+                if result is None:
+                    to_be_delete.append(child)
+                else:
+                    child.replace_with(result)
+
+            for child in to_be_delete:
+                child.extract()
+        return node
+
+    # remove the unnecessary level
+    def refine(self, node):
+
+        if isinstance(node, str):
+            return node
+        new_node = BeautifulSoup(features="html.parser")
+        new_node = new_node.new_tag(node.name)
+        for attr, value in node.attrs.items():
+            new_node[attr] = value
+
+        for child in node.children:
+            new_child = self.refine(child)
+            if new_child is not None:
+                new_node.append(new_child)
+
+        if len(new_node.attrs.keys()) == 0:
+            if len(new_node.contents) == 0:
+                new_node = None
+            elif len(new_node.contents) == 1:
+                new_node = new_node.contents[0]
+        return new_node
+
+    # reduce possible duplication of header and footer
+    def reducer(self, root):
+        self.check_redundancy(root, "header", self.header)
+        self.check_redundancy(root, "footer", self.footer)
+        return root
+
+
+    def check_redundancy(self, root, name, storage):
+        element = root.find(name)
+        if not element:
+            return
+        if element.prettify() not in storage:
+            storage.add(element.prettify())
+        else:
+            element.extract()
+
+
+def process_checker(html_doc: str):
+    # html_doc = """
+    # """
+    refiner = HTML_Refiner()
+    start = BeautifulSoup(html_doc, 'html.parser')
+    reduced = refiner.process(start)
+    print("final:\n" + reduced.prettify())
+    start = BeautifulSoup(html_doc, 'html.parser')
+    reduced = refiner.process(start)
+    print("final:\n" + reduced.prettify())
+
+if __name__ == "__main__":
+    html_doc = """
+    <body>
+ <ul>
+  <a href="/">
+   Home
+  </a>
+  <a href="/company">
+   COMPANY
+  </a>
+  <div>
+   Technology
+   <ul>
+    <a href="/seh-pathway-1">
+     sEH Pathway
+    </a>
+    <a href="/publications">
+     Publications
+    </a>
+    <a href="/pipeline-1">
+     Pipeline
+    </a>
+    <a href="/intellectual-property">
+     Intellectual Property
+    </a>
+   </ul>
+  </div>
+  <a href="/media">
+   Media
+  </a>
+  <a href="/invest">
+   Investors
+  </a>
+  <a href="/contact">
+   Contact
+  </a>
+ </ul>
+ <div>
+  <header>
+   <div>
+    <div>
+     0
+     items
+    </div>
+    $0
+   </div>
+   <div>
+    <a href="/">
+    </a>
+    <ul>
+     <a href="/">
+      Home
+     </a>
+     <a href="/company">
+      COMPANY
+     </a>
+     <div>
+      Technology
+      <ul>
+       <a href="/seh-pathway-1">
+        sEH Pathway
+       </a>
+       <a href="/publications">
+        Publications
+       </a>
+       <a href="/pipeline-1">
+        Pipeline
+       </a>
+       <a href="/intellectual-property">
+        Intellectual Property
+       </a>
+      </ul>
+     </div>
+     <a href="/media">
+      Media
+     </a>
+     <a href="/invest">
+      Investors
+     </a>
+     <a href="/contact">
+      Contact
+     </a>
+    </ul>
+   </div>
+  </header>
+  <div>
+   COMPANY
+   <div>
+    "sEH inhibitors have the potential to be the next first-line medication for fibrosis."
+    -Amir Zeki, M.D., UC Davis Pulmonary Critical Care
+   </div>
+  </div>
+  <div>
+   <div>
+    AccenGen Therapeutics was formed in order to take advantage of new opportunities to develop safer, more effective anti-inflammatories for treatment of sinusitis, pain, cardiovascular and respiratory indications as well as cancer.
+    <p>
+     The team at AccenGen includes leading regulatory experts, physicians, researchers, physician scientists and entrepreneurial visionaries.
+     We are constantly looking to expand to include individuals whose talents would contribute to realizing the company's strategy.
+    </p>
+    MANAGEMENT TEAM
+   </div>
+   <div>
+    SASSAN RAFIZADEH, M.D., PH.D.
+    Founding C.E.O.
+    Dr. Rafizadeh immigrated to the U.S. at the age of 15, after having spent over 7 months at a refugee camp in Austria.�Sassan holds a doctorate degree in molecular, cellular and systemic physiology from University of California at Davis and is a recipient of the U.C. Davis Max Kleiber Research Prize for superior scholarly achievement. With over 10 years of basic science and clinical research experience, he has authored multiple publications in top-tier peer-reviewed journals including Proceedings of the National Academy of Sciences (PNAS), American Heart Association Journal-Circulation, and Journal of American Medical Association (JAMA). Dr. Rafizadeh has helped build several successful businesses in the media, tech and healthcare sectors, most recently as co-founder of Rejuvenate Healthcare, LLC, a healthcare reinsurance plan specific to kidney failure patients, revolutionizing healthcare delivery. Sassan is an avid flamenco guitar player and a 3rd degree black belt in Kyokushin Karate-a full contact martial art.
+   </div>
+   <div>
+    Tianju Liu, M.D., Ph.D.
+    Co-Founder and Chief Science Officer- Pulmonary Division
+    <p>
+     Dr. Liu obtained her M.D., and Ph.D. degrees from Xi'an Jiaotong University Medical School, Xi'an, Shaanxi, China. Her early research was on tumor immunology with particular focus on the host immune response to HPV-induced cervical cancer, for which she earned multiple prestigious awards.
+     Upon completion of postdoctoral training at the University of Michigan, she developed her current interest on mechanisms of tissue injury, repair, fibrosis and remodeling. She went on to join the faculty at the Department of Pathology, University of Michigan Medical School and over the past 15 years continued to make several seminal discoveries on the importance of resistin-like molecules and telomerase in fibrosis, all under the auspices of NIH-funded projects. In addition to publishing more than 45 research articles and reviewing manuscripts for scientific journals, her scientific contributions have been recognized by multiple presentations at national and international scientific meetings. Dr. Liu has joined AccenGen to lead the pulmonary fibrosis pipeline. She brings unparalleled expertise to the company and the field of fibrosis in general.
+    </p>
+   </div>
+   <div>
+    Andrew Young, M.B.A., B.S.
+    Co-Founder and Project Manager
+    Andrew is President of HealFlow, a California based clinical research company and regulatory affairs consultancy, and Co-Founder and Co-Owner of Invivocure, a cardiology clinical research site. Previously, he was CEO of the clinical reference Laboratory, CoreMedica, which he brought out of insolvency, grew, and helped position for venture capital. Prior to that, he turned around, grew, and sold a medical media company and diagnostic test distributor, Diabetes in Control, Inc. At AccenGen, Andrew serves as project manager, administrating the efforts and ensuring the pipeline remains on track, on time, on budget, and consistent with regulatory requirements and the research protocol. Andrew brings exacting standards from his clinical research work and quality management software background, and leadership experience navigating highly regulated businesses through stressful times.
+   </div>
+   <div>
+    Heidi Nelson-Keherly, Ph.D. | Vice President - PreClinical
+    Dr. Nelson-Keherly is a 15 year veteran of working with small and mid-size biotechs to develop their drug programs through to IND submission. She has managed drug development programs spanning preclinical lead optimization, pharmacokinetic and safety studies, bio-analysis, process scale up and development, as well as CMC. During her career, she has been involved with over 300 drug development programs. In addition, Dr. Nelson-Keherly was responsible for several multi-therapeutic clinical research sites that participated in over 80 Phase II-IV clinical trials.
+   </div>
+   <div>
+    Ryan Haynes�| Director of Operations
+    Ryan has successfully assisted in over 200 startup programs. He brings over 15 years of experience in the pharmaceutical industry with expertise in project management, drug development (discovery through commercialization), outsourcing, investigator relationships and patient recruitment. His background also includes leading drug development programs for nanotechnology and targeted drug delivery systems.
+   </div>
+   <div>
+    Jeff Herndon, C.P.A. | Chief Financial Officer &amp; Treasurer
+    Mr. Herndon is a Merger &amp; Acquisition banker with 15 years of international M&amp;A and strategic consulting experience and a partner at Bay Tower Group. From 1996 to 2003, he served as a V.P. of M&amp;A services for The Geneva Group, a subsidiary of Citi Group. He has served as a senior accountant for Deloitte &amp; Touche, one of the top four accounting firms in the world.� He has a 5 year B.S. degree in Accounting from the University of South Florida.
+   </div>
+   <div>
+    SCIENTIFIC BOARD OF ADVISORS
+    Nipavan Chiamvimonvat, M.D. | NIH, AHA - U.C. Davis | Molecular and Cellular Cardiology
+    Dr. Chiamvimonvat is a world-renowned cardiologist and cardiovascular researcher. She has pioneered the study of ion channels in the heart and more recently the study of sEH inhibitors in cardiovascular disease. She is a distinguished Professor and the National Institutes of Health T32 Program Director in basic and translational cardiovascular sciences. She is also the co-director of Howard Hughes Medical Institute integrating medicine into basic science at U.C. Davis. She is a top advisor and investor to AccenGen and continues to be an invaluable asset to the cardiovascular arm of the company.
+    Jim Finke, Ph.D. | NIH - Cleveland Clinic | Immunology
+    Dr. Finke is a world-renowned immunologist. His lab was the first to show that Sunitinib, now the front line therapy for metastatic renal cell carcinoma (RCC), reduces the number of myeloid-derived suppressor cells (MDSCs) in RCC patients resulting in improved T cell function. Dr. Finke currently serves as Professor, Molecular Medicine, Cleveland Clinic Lerner College of Medicine of Case Western Reserve University, and is a Staff Member, Immunology Department, Lerner Research Institute, Cleveland Clinic Foundation. Dr. Finke is the author of over 100 scientific papers and the recipient of numerous academic awards. Dr. Finke serves as a member of the NIH, Experimental Therapeutics Study Section, the Kidney Cancer Association Scientific Advisory Board and multiple pharmaceutical and biological drug companies.
+    Noam Cohen, M.D. Ph.D.�| Director - University of Pennsylvania Rhinology Laboratory | Rhinology
+    Dr. Cohen is a world-renowned otolaryngologist. He holds an MD/PhD from Johns Hopkins University defending his PhD Neuroscience. He completed his residency training in Otorhinolaryngology - Head and Neck Surgery at the University of Pennsylvania where he stayed to complete a Rhinology and Skull Base Surgery fellowship in 2004 after which he joined the faculty and established the Rhinology Translational research effort. His current research interests include upper airway innate immunity with a focus on molecular modulation of mucociliary clearance specifically studying cilia function in the healthy and disease state. He is also involved in developing novel therapeutic interventions to restore normal mucociliary clearance in inflammatory respiratory disease states such as Chronic Rhinosinusitis. Additionally, he is focused on developing both cell culture models for studying the molecular processes implicated in Chronic Rhinosinusitis and animal models to screen topical therapeutics.
+    Brian Rogers, Ph.D. | Founder - Pacific Biodevelopment | Preclinical Toxicology
+    Dr. Rogers is the founder of the Pacific BioDevelopment, LLC a company which specializes in providing drug development consultation services to biotechnology and pharmaceutical companies. He has 25 years of industrial toxicology experience, including five years at Genentech. During this time he has extensively interacted with the FDA and authored over 100 IND and over 20 NDA and BLA nonclinical sections on behalf of clients working on various types of medical products. He is a 22- year Diplomat of the American Board of Toxicology and also holds an MBA from and was an adjunct professor at the UCDavis School of Management.
+    Mark Staples, Ph.D. | Founder-Cusp PharmaTech | CMC
+    For more than 25 years, in various positions from Director to VP, Dr. Staples has helped transform scientifically interesting projects into commercial products. He has played critical operating and leadership roles in five early stage companies, in addition to founding and leading the Biogen Formulation and Analytical Development Group from 1988-1997. He has extensive experience with project management and compilation of the technical (CMC) portion of regulatory submissions. Dr. Staples has chaired the American Association of Pharmaceutical Scientists (AAPS) Biotechnology Section and has served as President and Treasurer of the Parenteral Drug Association (PDA) New England Chapter.
+    corporate board of advisors
+    Jim Sergi | Drug Development and Regulatory Affairs
+    During his time as C.E.O. of ProED, Mr. Sergi's company was responsible for over 50 successful NDA/BLA and EMA applications and defenses for various drugs, biologics, and diagnostic tests, including over 150-510(k) submissions. Jim has played a major role in the commercial success and launch of over 400 drugs and biologics worldwide for various indications and special patient populations. As President of CSSi LifeSciences, he has established a paradigm for helping clients create a strategic pathway from discovery to commercialization resulting in a reduction of development time, costs and resources. Mr. Sergi's academic and medical experience includes Director for Department of Experimental Therapeutics at the Cleveland Clinic Cancer Center, Research Manager, Case Western VA Medical Center, and Associate Professor of Medical-Surgical Nursing at the Case Western Reserve University, and Cleveland State University. Jim also serves on the boards of numerous drug, non-profit and venture firms, including UC San Francisco Board of Overseers.
+    Doug Martin, J.D. | Strategy
+    Mr. Martin serves as Vice President and Assistant General Counsel to Fireman�s Fund Insurance Company, a subsidiary of Allianz SE, the world�s largest property and casualty insurer. He has held various positions at the company for the past 32 years. His experience includes management of regulatory approvals and operational interface for the sale of a $950 Million book of business. As VP and Assistant General Counsel he oversees insurance regulatory and legal matters for Fireman�s Fund�s $2 Billion book of business in the United States.� He leads a team of 10, comprised of lawyers, paralegals and insurance specialist and focuses on legal advice to business product development division, distribution management, regulatory complaints and inquiries and direct lobbying and negotiations with key insurance regulatory agencies nationally. His key accomplishments include passage of tax and financial reform legislation in California for Fireman�s Fund and the insurance industry.
+    Ben Bedi, M.S., J.D. | General Counsel
+    Mr. Bedi is the founder of EcoTech Law and is a patent attorney with more than 16 years of experience in various aspects of patent law, including prosecution, patent portfolio design, due diligence, and litigation. He has expertise in creating effective strategies which maximize intellectual property asset value and has litigated patent infringement cases in district courts and at the International Trade Commission. Mr. Bedi�s area of expertise includes patent valuations, portfolio analysis, and licensing advice. He provides patent due diligence for clients involved in various corporate transactions, including mergers and acquisitions and other investments in companies developing innovative technologies. In addition, Mr. Bedi and his team provide full patent support for AccenGen Therapeutics, Inc. to ensure a legal and IP strategy consistent with the overall business plan.
+    Edward Hamati, B.S., M.B.A. | Business Development and Strategy
+    Mr. Hamati has over 15 years of management experience in finance, business strategy, M&amp;As, laboratory research and management consulting roles. He currently serves as Director at Biogenerator, an early-stage venture capital firm in the life sciences.
+    Strategic Partnership
+    CSSi LifeSciences |�AccenGen Therapeutics, Inc. has partnered with CSSi Life Sciences� to ensure the most efficient path to drug development. CSSi LifeSciences� team members have played a key role in developing over 400 drugs, biologics, compounds,�medical devices and in-vitro diagnostics for clients as a trusted biopharmaceutical partner from discovery to commercialization.
+   </div>
+  </div>
+  <footer>
+   <a href="#top">
+    Top
+   </a>
+   <ul>
+    <a href="/contact">
+     Contact
+    </a>
+    <a href="/legal">
+     Legal
+    </a>
+   </ul>
+  </footer>
+ </div>
+ �
+ �
+</body>
+    """
+    process_checker(html_doc)
